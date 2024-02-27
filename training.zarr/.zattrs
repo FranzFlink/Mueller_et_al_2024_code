@@ -1,0 +1,23 @@
+{
+    "Conventions": "\"CF-1.8\"",
+    "author": "Michael Sch\u00e4fer, Sophie Rosenburg, Andr\u00e9 Ehrlich, Johannes R\u00f6ttenbacher, and Manfred Wendisch",
+    "campaign": "HALO-AC3",
+    "comment_1": "Band wavelength range: 7.70 - 12.00 micrometers",
+    "comment_2": "Flight direction is towards positive y-direction of the image",
+    "comment_3": "Thermal infrared imager information: focal length: 15 mm, image size: 640 x 512 pixels, detector size: 9.60 mm x 7.68 mm, FOV: 35.49\u00b0 x 28.71\u00b0",
+    "comment_4": "For comparability between all filters provided image size: 635 x 507 pixels",
+    "contact_1": "Michael Sch\u00e4fer, Leipzig University, michael.schaefer@uni-leipzig.de",
+    "contact_2": "Sophie Rosenburg, Leipzig University, sophie.rosenburg@uni-leipzig.de",
+    "created_on": "2023-10-19",
+    "history": "2023-09-11: First version with destriping, image filtering, and pixel correction",
+    "institution": "Leipzig University, Leipzig Institute for Meteorology",
+    "instrument": "VELOX",
+    "platform": "HALO",
+    "reference": "Sch\u00e4fer, M., Wolf, K., Ehrlich, A., Hallbauer, C., J\u00e4kel, E., Jansen, F., Luebke, A. E., M\u00fcller, J., Thob\u00f6ll, J., R\u00f6schenthaler, T., Stevens, B., and Wendisch, M.: VELOX \u2013 A new thermal infrared imager for airborne remote sensing of cloud and surface properties, Atmos. Meas. Tech., 15, 1491-1509, https://doi.org/10.5194/amt-15-1491-2022, 2022.",
+    "research_flight_day": "20220314",
+    "research_flight_number": "RF04",
+    "source": "Airborne imaging with the VELOX system",
+    "title": "Two-dimensional cloud-top or surface brightness temperature with 1 Hz temporal resolution derived at flight altitude from VELOX during the HALO-(AC)3 field campaign.",
+    "variable": "BT_2D, BT_Center",
+    "version": "Version v3.0 from 2023-09-11"
+}

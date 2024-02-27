@@ -1,0 +1,10 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time",
+        "band",
+        "x",
+        "y"
+    ],
+    "long_name": "Two-dimensional brightness temperature of VELOX measured within 7.70 - 12.00 micrometers wavelength band at flight altitude",
+    "units": "Celsius"
+}
