@@ -135,8 +135,8 @@ def plot_confusion_matrix(confusion_matrix):
     plt.colorbar(label='Total number of samples')
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
-    plt.xticks(np.arange(4), ['Open Water', 'Dark Nilas', 'Bare Sea Ice', 'Snow-covered Sea Ice'], rotation=45)
-    plt.yticks(np.arange(4), ['Open Water', 'Dark Nilas', 'Bare Sea Ice', 'Snow-covered Sea Ice'], rotation=45)
+    plt.xticks([1, 2, 3], ['Open Water', 'Thin Ice', 'Snow-covered Sea Ice'], rotation=45)
+    plt.yticks([1, 2, 3], ['Open Water', 'Thin Ice', 'Bare Sea Ice', 'Snow-covered Sea Ice'], rotation=45)
 
     # plot the percentage of the confusion matrix into the figure
 
