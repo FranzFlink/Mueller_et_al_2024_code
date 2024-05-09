@@ -10,14 +10,22 @@ from sklearn.metrics import mean_squared_error
 import json
 import cartopy
 import cartopy.crs as ccrs
+import argparse
 
+parser = argparse.ArgumentParser(description='Correlate VELOX and MODIS SST')
+
+parser.add_argument('--filter', type=int, default=6, help='Filter to use for VELOX data')
+
+args = parser.parse_args()
+
+filter = args.filter
 
 MODIS = xr.open_dataset('/projekt_agmwend/home_rad/Joshua/MODIS/MODIS_Aqua_Sea_Ice_Extent_and_IST_Daily_L3_Global_4km_EASE-Grid_Day_V061.nc')
 VELOX = xr.open_dataset('/projekt_agmwend/home_rad/Joshua/MasterArbeit/HALO-AC3_VELOX_coarsen_100_v1s.nc')
-VELOX_new = xr.open_dataset('/projekt_agmwend/home_rad/Joshua/HALO-AC3_unified_data/unified_velox_nadir_Filter_01.nc')
+VELOX_new = xr.open_dataset(f'/projekt_agmwend/home_rad/Joshua/HALO-AC3_unified_data/unified_velox_nadir_Filter_0{filter}.nc')
 surface_mask = xr.open_dataset('/projekt_agmwend/home_rad/Joshua/HALO-AC3_unified_data/unified_surface_mask.nc')
 gps = xr.open_dataset('/projekt_agmwend/home_rad/Joshua/HALO-AC3_unified_data/unified_gps_new.nc')
-
+surface_mask['Vfull_mean'] = VELOX_new['Vfull_mean']
 
 dates = np.unique(VELOX_new['time'].dt.date)
 
@@ -159,7 +167,7 @@ for date in tqdm(dates):
         mask_title = 'Open Water' if mask_index == 0 else 'Ice'
         ax[i].set_title(f'Mask: {mask_title}; R²: {r_value**2:.2f}\n; Slope: {slope:.2f}; Intercept: {intercept:.2f}')
 
-    mask = ~np.isnan(MODIS_skin_T) & ~np.isnan(VELOX_skin_T)
+    mask = ~np.isnan(MODIS_skin_T) & ~np.isnan(VELOX_skin_T) & cloud_mask
 
     y = np.array(MODIS_skin_T)[mask] - 273.15
     x = np.array(VELOX_skin_T)[mask] - 273.15
@@ -178,10 +186,9 @@ for date in tqdm(dates):
     ax['F'].plot([-28, 5], [-28, 5], color='black', ls='--', lw=1, label='1:1 Line')
     ax['F'].legend()
     
-    plt.savefig(f'../../plots/sst_overview/{date}_comparison.png')
-
+    plt.savefig(f'../../plots/sst_overview/filter_0{filter}/{date}_comparison.png')
 
     cross_corr_dataset.append(result_ds)
 
 cross_corr_dataset = xr.concat(cross_corr_dataset, dim='time')
-cross_corr_dataset.to_netcdf('/projekt_agmwend/home_rad/Joshua/HALO-AC3_unified_data/unified_cross_corr_dataset.nc')
+cross_corr_dataset.to_netcdf(f'/projekt_agmwend/home_rad/Joshua/HALO-AC3_unified_data/unified_cross_corr_dataset_Filter_0{filter}.nc')
