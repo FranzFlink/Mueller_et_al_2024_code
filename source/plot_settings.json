@@ -1,0 +1,1 @@
+{"figure.figsize": [6.616, 2.4000000000000004], "figure.dpi": 300, "font.size": 10, "font.family": "sans-serif", "axes.labelsize": 10, "axes.titlesize": 10, "xtick.labelsize": 8, "ytick.labelsize": 8, "legend.fontsize": 10, "lines.linewidth": 2, "grid.color": "#cccccc", "grid.linestyle": "-", "grid.linewidth": 0.5, "axes.grid": true, "savefig.format": "pdf", "savefig.dpi": 300}
