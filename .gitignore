@@ -12,6 +12,7 @@
 *.zip
 *.gz
 *.pdf
+*.pth
 *__
 *.ubj
 source/old/
@@ -19,3 +20,6 @@ plots/
 data/
 source/sst/
 source/preprocess/
+source/model/
+source/AutogluonModel_random_forest_VELOX/
+source/training.zarr/
