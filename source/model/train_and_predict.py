@@ -5,7 +5,7 @@ import pandas as pd
 import os
 import joblib
 from tqdm import tqdm
-from helper import calc_local_roughness, timing_wrapper, print_classification_report
+from source.lib.helper import calc_local_roughness, timing_wrapper, print_classification_report
 from dask_ml.wrappers import ParallelPostFit
 
 from sklearn.ensemble import RandomForestClassifier, HistGradientBoostingClassifier

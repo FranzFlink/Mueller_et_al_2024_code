@@ -18,23 +18,22 @@ encoding = {
     'lon' : {'chunks' : (50, -1)},
     'yaw' : {'chunks' : (50, -1)},
 
-
 }
 
 
 
 @timing_wrapper
-def main():
-    argparser = argparse.ArgumentParser()
-    argparser.add_argument('--date', type=str, help='date to process')
-    args = argparser.parse_args()
+def main(date):
+    # argparser = argparse.ArgumentParser()
+    # argparser.add_argument('--date', type=str, help='date to process')
+    # args = argparser.parse_args()
 
-    date = args.date
+    #date = args.date
 
-    cluster = LocalCluster(local_directory='/projekt_agmwend/home_rad/Joshua/dask-worker-space', memory_limit='16GB', n_workers=20, threads_per_worker=1, dashboard_address=':21197')
+    cluster = LocalCluster(local_directory='/projekt_agmwend/home_rad/Joshua/dask-worker-space', memory_limit='16GB', n_workers=10, threads_per_worker=1, dashboard_address=':21197')
     client = Client(cluster)
 
-    filenames = pd.read_csv('~/MasterArbeit/filenames.csv')
+    filenames = pd.read_csv('../../data/base_filenames.csv')
 
     filename = filenames['VELOX_seaice'].where(filenames['date'] == date).dropna().values[0]
 
@@ -47,12 +46,18 @@ def main():
         gc.collect()
         #ds_new.to_zarr(filename+'_v_0.1', mode='w', consolidated=True)
 
-        filename = filename.replace('.zarr', '_v_0.1.nc')
+        filename = filename.replace('.zarr', '_v_0.2.nc')
     
         ds_new.to_netcdf(filename, mode='w', engine='h5netcdf')
     client.close()
 
 
-
 if __name__ == '__main__':
-    main()
+    
+    dates = ['2022-03-14', '2022-03-16', '2022-03-20', '2022-03-21','2022-03-28', '2022-03-29','2022-03-30', '2022-04-01', '2022-04-04', '2022-04-07', '2022-04-08', '2022-04-10', '2022-04-11', '2022-04-12']
+
+    for date in dates:
+
+        main(date)
+        print(f'Finished processing {date}')
+        print('-----------------------------------')
