@@ -1,6 +1,4 @@
-# High-resolution maps of Arctic surface skin temperature and type
-retrieved from airborne thermal infrared imagery collected during
-the HALO–(AC)³ campaign
+# High-resolution maps of Arctic surface skin temperature and type retrieved from airborne thermal infrared imagery collected during the HALO–(AC)³ campaign
 
 This repository reproduces the analysis and retrievals outlined in Müller et al., in submission to AMT. The repo is divided in three major parts:
 1. Surface type retrieval using state-of-the-art supvervised statistical learning; for the final version a random forest classifier is used, but many different models are evaluated
