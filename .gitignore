@@ -13,6 +13,7 @@
 *.gz
 *.pdf
 *.pth
+*.zarr
 *__
 *.ubj
 source/old/
@@ -24,3 +25,5 @@ source/model/
 source/AutogluonModel_random_forest_VELOX/
 source/training.zarr/
 source/animation/
+source/lib
+source/old
