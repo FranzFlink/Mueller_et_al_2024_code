@@ -1,0 +1,9 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time",
+        "band"
+    ],
+    "description": "Platform attitude coordinate",
+    "long_name": "Heading",
+    "units": "degree"
+}

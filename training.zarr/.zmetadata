@@ -1,0 +1,282 @@
+{
+    "metadata": {
+        ".zattrs": {
+            "Conventions": "\"CF-1.8\"",
+            "author": "Michael Sch\u00e4fer, Sophie Rosenburg, Andr\u00e9 Ehrlich, Johannes R\u00f6ttenbacher, and Manfred Wendisch",
+            "campaign": "HALO-AC3",
+            "comment_1": "Band wavelength range: 7.70 - 12.00 micrometers",
+            "comment_2": "Flight direction is towards positive y-direction of the image",
+            "comment_3": "Thermal infrared imager information: focal length: 15 mm, image size: 640 x 512 pixels, detector size: 9.60 mm x 7.68 mm, FOV: 35.49\u00b0 x 28.71\u00b0",
+            "comment_4": "For comparability between all filters provided image size: 635 x 507 pixels",
+            "contact_1": "Michael Sch\u00e4fer, Leipzig University, michael.schaefer@uni-leipzig.de",
+            "contact_2": "Sophie Rosenburg, Leipzig University, sophie.rosenburg@uni-leipzig.de",
+            "created_on": "2023-10-19",
+            "history": "2023-09-11: First version with destriping, image filtering, and pixel correction",
+            "institution": "Leipzig University, Leipzig Institute for Meteorology",
+            "instrument": "VELOX",
+            "platform": "HALO",
+            "reference": "Sch\u00e4fer, M., Wolf, K., Ehrlich, A., Hallbauer, C., J\u00e4kel, E., Jansen, F., Luebke, A. E., M\u00fcller, J., Thob\u00f6ll, J., R\u00f6schenthaler, T., Stevens, B., and Wendisch, M.: VELOX \u2013 A new thermal infrared imager for airborne remote sensing of cloud and surface properties, Atmos. Meas. Tech., 15, 1491-1509, https://doi.org/10.5194/amt-15-1491-2022, 2022.",
+            "research_flight_day": "20220314",
+            "research_flight_number": "RF04",
+            "source": "Airborne imaging with the VELOX system",
+            "title": "Two-dimensional cloud-top or surface brightness temperature with 1 Hz temporal resolution derived at flight altitude from VELOX during the HALO-(AC)3 field campaign.",
+            "variable": "BT_2D, BT_Center",
+            "version": "Version v3.0 from 2023-09-11"
+        },
+        ".zgroup": {
+            "zarr_format": 2
+        },
+        "BT_2D/.zarray": {
+            "chunks": [
+                1,
+                1,
+                250,
+                250
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f4",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                64,
+                5,
+                635,
+                507
+            ],
+            "zarr_format": 2
+        },
+        "BT_2D/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "band",
+                "x",
+                "y"
+            ],
+            "long_name": "Two-dimensional brightness temperature of VELOX measured within 7.70 - 12.00 micrometers wavelength band at flight altitude",
+            "units": "Celsius"
+        },
+        "BT_Center/.zarray": {
+            "chunks": [
+                1,
+                1
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f4",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                64,
+                5
+            ],
+            "zarr_format": 2
+        },
+        "BT_Center/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "band"
+            ],
+            "long_name": "Brightness temperature average of VELOX central 10 by 10 spatial pixels with respect to image size of 635 x 507 spatial pixels",
+            "units": "Celsius"
+        },
+        "alt/.zarray": {
+            "chunks": [
+                1,
+                1
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f4",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                64,
+                5
+            ],
+            "zarr_format": 2
+        },
+        "alt/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "band"
+            ],
+            "description": "Platform altitude coordinate",
+            "long_name": "altitude",
+            "units": "m"
+        },
+        "label/.zarray": {
+            "chunks": [
+                16,
+                159,
+                254
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "|u1",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                64,
+                635,
+                507
+            ],
+            "zarr_format": 2
+        },
+        "label/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "x",
+                "y"
+            ]
+        },
+        "lat/.zarray": {
+            "chunks": [
+                1,
+                1
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f4",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                64,
+                5
+            ],
+            "zarr_format": 2
+        },
+        "lat/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "band"
+            ],
+            "description": "Platform latitude coordinate",
+            "long_name": "latitude",
+            "standard_name": "latitude",
+            "units": "degrees_north"
+        },
+        "lon/.zarray": {
+            "chunks": [
+                1,
+                1
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f4",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                64,
+                5
+            ],
+            "zarr_format": 2
+        },
+        "lon/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "band"
+            ],
+            "description": "Platform longitude coordinate",
+            "long_name": "longitude",
+            "standard_name": "longitude",
+            "units": "degrees_east"
+        },
+        "time/.zarray": {
+            "chunks": [
+                64
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<i8",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                64
+            ],
+            "zarr_format": 2
+        },
+        "time/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time"
+            ],
+            "calendar": "proleptic_gregorian",
+            "long_name": "time",
+            "units": "seconds since 2022-03-20 10:45:00"
+        },
+        "yaw/.zarray": {
+            "chunks": [
+                1,
+                1
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f4",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                64,
+                5
+            ],
+            "zarr_format": 2
+        },
+        "yaw/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "band"
+            ],
+            "description": "Platform attitude coordinate",
+            "long_name": "Heading",
+            "units": "degree"
+        }
+    },
+    "zarr_consolidated_format": 1
+}
