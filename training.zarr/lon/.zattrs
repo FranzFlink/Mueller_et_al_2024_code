@@ -1,0 +1,10 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time",
+        "band"
+    ],
+    "description": "Platform longitude coordinate",
+    "long_name": "longitude",
+    "standard_name": "longitude",
+    "units": "degrees_east"
+}

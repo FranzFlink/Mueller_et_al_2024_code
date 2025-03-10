@@ -1,0 +1,8 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time",
+        "band"
+    ],
+    "long_name": "Brightness temperature average of VELOX central 10 by 10 spatial pixels with respect to image size of 635 x 507 spatial pixels",
+    "units": "Celsius"
+}
