@@ -5,7 +5,9 @@ import pandas as pd
 from autogluon.tabular import TabularDataset, TabularPredictor
 from imblearn.under_sampling import RandomUnderSampler
 from sklearn.model_selection import train_test_split
-from source.lib.helper import timing_wrapper, apply_roughness, calc_local_roughness
+import sys
+sys.path.append('../lib')
+from helper import timing_wrapper, apply_roughness, calc_local_roughness
 from tqdm import tqdm
 from dask.distributed import Client, LocalCluster  
 import os
@@ -14,7 +16,7 @@ warnings.filterwarnings("ignore")
 from xhistogram.xarray import histogram
 
 #predictor = TabularPredictor.load("AutogluonModels/ag-20240521_080247")
-predictor = TabularPredictor.load("AutogluonModels/rf_HALO-AC3")
+predictor = TabularPredictor.load("../model/AutogluonModel_random_forest_VELOX")
 
 
 ds = xr.open_dataset('/projekt_agmwend/home_rad/Joshua/HALO-AC3_VELOX_sea_ice/2022-04-04_v_0.1.nc')
@@ -73,7 +75,7 @@ def prepare_load_predict(ds):
     ### add a second condition for the water_ice_mix: if the skin temperature is below -2.5°C; this is only applied to open water 
     ### this has to be further discussed: should we lift the temperature of potential open-water? 
     ### Right now, this decision seems to be arbitrary, but could be argued on the basis of emissivity (?)
-    ds_predicted['skt'] = xr.where(ds_predicted['label'] == 1, ds.isel(band=3)['BT_2D'].values + 4.4, ds_predicted['skin_t'])
+    # ds_predicted['skt'] = xr.where(ds_predicted['label'] == 1, ds.isel(band=3)['BT_2D'].values + 4.4, ds_predicted['skin_t'])
 
     cold_water = (ds_predicted['label'] == 1) & (ds_predicted['skin_t'] < -2.5)
     water_ice_mix = water_ice_mix | cold_water
@@ -83,7 +85,8 @@ def prepare_load_predict(ds):
     quality_flag = quality_flag.values
 
     ### Here, we calculate the skin temperature, which is just a linear function of the brightness temperature of the 11.7µm channel. The coefficients are from the simulation of the radiative transfer model
-    ds_copy['skt'] = xr.where(ds_predicted['label'] == 1, ds_copy['BT_2D'].isel(band=3) * .96 + 1.1, ds_copy['BT_2D'].isel(band=3) * .96 + 1.1)
+    ds_copy['skt'] = ds_copy['BT_2D'].isel(band=3)
+
     ds_copy['type_frac'] = histogram(ds_predicted['label'],bins=np.array([.5, 1.5, 2.5, 3.5, 4.5]), dim=['y', 'x']) / (635 * 512)
     ds_copy['SIC_upper'] = ds_copy['type_frac'].isel(label_bin=[1, 2, 3]).sum('label_bin')
     ds_copy['SIC_lower'] = ds_copy['type_frac'].isel(label_bin=[2, 3]).sum('label_bin')
@@ -142,6 +145,7 @@ if __name__ == '__main__':
     for i, ds in enumerate(ds_list):
 
         ds = ds.load()
+        ds = apply_roughness(ds)
 
         date = ds.time.dt.strftime('%Y-%m-%d').values[0]
         path_stump = f'/projekt_agmwend/home_rad/Joshua/Mueller_et_al_2024/data/predicted/circles/{ds_names[i]}'
@@ -149,11 +153,11 @@ if __name__ == '__main__':
             os.makedirs(path_stump)
 
         for time in tqdm(ds['time']):
-            time = time.dt.strftime('%Y-%m-%dT%H:%M:%S').values
+            str_time = time.dt.strftime('%Y-%m-%dT%H_%M_%S').values
             ### check if the file already exists
-            if os.path.exists(f'{path_stump}/predicted_{time}.nc'):
-                continue
+            # if os.path.exists(f'{path_stump}/predicted_{time}.nc'):
+            #     continue
             ds_timestep = ds.sel(time=time)
-            ds_timestep = apply_roughness(ds_timestep)
+            #ds_timestep = apply_roughness(ds_timestep)
             ds_predicted = prepare_load_predict(ds_timestep)
-            ds_predicted.to_netcdf(f'{path_stump}/predicted_{time}.nc')
+            ds_predicted.to_netcdf(f'{path_stump}/predicted_{str_time}.nc', mode='w')
